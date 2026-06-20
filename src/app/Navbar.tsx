@@ -6,6 +6,7 @@ import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import {
   Menu,
+  Watch,
   X,
   ChevronDown,
   Sparkles,
@@ -27,6 +28,10 @@ import {
   Snowflake,
   Cake,
   House,
+  Camera,
+  FileText,
+  Lock,
+  CalendarDays,
 } from 'lucide-react';
 
 interface SubItem {
@@ -55,11 +60,11 @@ const navItems: NavItem[] = [
     accentBg: '#E5EFFF',
     icon: Heart,
     subpages: [
-      { href: '/about', label: 'Welcome to Phulwari', icon: Heart, color: '#FF4D8D', bg: '#FFE6EF' },
-      { href: '/about/mission', label: 'Our Mission', icon: Target, color: '#3D8BFF', bg: '#E5EFFF' },
-      { href: '/about/whychooseus', label: 'Why Choose Us', icon: Sparkles, color: '#E8A621', bg: '#FFF3D9' },
-      { href: '/about/corevalues', label: 'Core Values', icon: Shield, color: '#34B36B', bg: '#E3F7EA' },
-      { href: '/about/facilities', label: 'Our Facilities', icon: Building2, color: '#8B5CF6', bg: '#EFE7FE' },
+      { href: '/about',             label: 'Welcome to Phulwari', icon: Heart,     color: '#FF4D8D', bg: '#FFE6EF' },
+      { href: '/about/mission',     label: 'Our Mission',         icon: Target,    color: '#3D8BFF', bg: '#E5EFFF' },
+      { href: '/about/whychooseus', label: 'Why Choose Us',       icon: Sparkles,  color: '#E8A621', bg: '#FFF3D9' },
+      { href: '/about/corevalues',  label: 'Core Values',         icon: Shield,    color: '#34B36B', bg: '#E3F7EA' },
+      { href: '/about/facilities',  label: 'Our Facilities',      icon: Building2, color: '#8B5CF6', bg: '#EFE7FE' },
     ],
   },
   {
@@ -69,12 +74,12 @@ const navItems: NavItem[] = [
     accentBg: '#E3F7EA',
     icon: Activity,
     subpages: [
-      { href: '/activities/music-dance', label: 'Music & Dance', icon: Music, color: '#FF4D8D', bg: '#FFE6EF' },
-      { href: '/activities/gymnastics-mma', label: 'Gymnastics & MMA', icon: Swords, color: '#3D8BFF', bg: '#E5EFFF' },
-      { href: '/activities/roller-skating', label: 'Roller Skating', icon: Footprints, color: '#E8A621', bg: '#FFF3D9' },
-      { href: '/activities/art-craft', label: 'Art & Craft', icon: Palette, color: '#34B36B', bg: '#E3F7EA' },
-      { href: '/activities/yoga-cricket', label: 'Yoga & Cricket', icon: Disc3, color: '#8B5CF6', bg: '#EFE7FE' },
-      { href: '/activities/play-zone', label: 'Play Zone', icon: Gamepad2, color: '#FF8A3D', bg: '#FFEADB' },
+      { href: '/activities/music-dance',    label: 'Music & Dance',      icon: Music,    color: '#FF4D8D', bg: '#FFE6EF' },
+      { href: '/activities/gymnastics-mma', label: 'Gymnastics & MMA',   icon: Swords,   color: '#3D8BFF', bg: '#E5EFFF' },
+      { href: '/activities/roller-skating', label: 'Roller Skating',     icon: Footprints,color: '#E8A621',bg: '#FFF3D9' },
+      { href: '/activities/art-craft',      label: 'Art & Craft',        icon: Palette,  color: '#34B36B', bg: '#E3F7EA' },
+      { href: '/activities/yoga-cricket',   label: 'Yoga & Cricket',     icon: Disc3,    color: '#8B5CF6', bg: '#EFE7FE' },
+      { href: '/activities/play-zone',      label: 'Play Zone',          icon: Gamepad2, color: '#FF8A3D', bg: '#FFEADB' },
     ],
   },
   {
@@ -84,8 +89,8 @@ const navItems: NavItem[] = [
     accentBg: '#EFE7FE',
     icon: Dumbbell,
     subpages: [
-      { href: '/mothers/fitness', label: 'Mother Fitness Program', icon: Dumbbell, color: '#34B36B', bg: '#E3F7EA' },
-      { href: '/mothers/toddler-program', label: 'Mother & Toddler Program', icon: Baby, color: '#FF4D8D', bg: '#FFE6EF' },
+      { href: '/mothers/fitness',         label: 'Mother Fitness Program',    icon: Dumbbell, color: '#34B36B', bg: '#E3F7EA' },
+      { href: '/mothers/toddler-program', label: 'Mother & Toddler Program',  icon: Baby,     color: '#FF4D8D', bg: '#FFE6EF' },
     ],
   },
   {
@@ -95,21 +100,43 @@ const navItems: NavItem[] = [
     accentBg: '#FFEADB',
     icon: Cake,
     subpages: [
-      { href: '/events/summer', label: 'Summer Camp', icon: Sun, color: '#E8A621', bg: '#FFF3D9' },
-      { href: '/events/winter', label: 'Winter Camp', icon: Snowflake, color: '#3D8BFF', bg: '#E5EFFF' },
-      { href: '/events/birthday', label: 'Birthday Party Celebrations', icon: Cake, color: '#FF8A3D', bg: '#FFEADB' },
+      { href: '/events/summer',   label: 'Summer Camp',               icon: Sun,      color: '#E8A621', bg: '#FFF3D9' },
+      { href: '/events/winter',   label: 'Winter Camp',               icon: Snowflake,color: '#3D8BFF', bg: '#E5EFFF' },
+      { href: '/events/birthday', label: 'Birthday Party Celebrations',icon: Cake,    color: '#FF8A3D', bg: '#FFEADB' },
+    ],
+  },
+  {
+    label: 'Batch & Gallery',
+    href: '/batch-gallery',
+    accent: '#14B8A6',
+    accentBg: '#DFF7F1',
+    icon: CalendarDays,
+    subpages: [
+      { href: '/batch-galary/batch',   label: 'Batch & Timings', icon: Watch,        color: '#E8A621', bg: '#FFF3D9' },
+      { href: '/batch-galary/gallery', label: 'Gallery',         icon: Camera,       color: '#3D8BFF', bg: '#E5EFFF' },
+    ],
+  },
+  {
+    label: 'Legal',
+    href: '/legal',
+    accent: '#6B6480',
+    accentBg: '#F0ECF8',
+    icon: FileText,
+    subpages: [
+      { href: '/legal/terms',   label: 'Terms & Conditions', icon: FileText, color: '#FF4D8D', bg: '#FFE6EF' },
+      { href: '/legal/privacy', label: 'Privacy Policy',     icon: Lock,     color: '#3D8BFF', bg: '#E5EFFF' },
     ],
   },
 ];
 
 const Navbar: React.FC = () => {
-  const [mobileOpen, setMobileOpen] = useState(false);
+  const [mobileOpen, setMobileOpen]   = useState(false);
   const [openDesktop, setOpenDesktop] = useState<string | null>(null);
-  const [openMobile, setOpenMobile] = useState<string | null>(null);
-  const [scrolled, setScrolled] = useState(false);
-  const navRef = useRef<HTMLDivElement>(null);
-  const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const pathname = usePathname();
+  const [openMobile, setOpenMobile]   = useState<string | null>(null);
+  const [scrolled, setScrolled]       = useState(false);
+  const navRef      = useRef<HTMLDivElement>(null);
+  const closeTimer  = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const pathname    = usePathname();
 
   const isActive = (href: string) =>
     href === '/' ? pathname === '/' : pathname === href || pathname?.startsWith(`${href}/`);
@@ -117,30 +144,22 @@ const Navbar: React.FC = () => {
   const isParentActive = (item: NavItem) =>
     isActive(item.href) || (item.subpages?.some((s) => isActive(s.href)) ?? false);
 
-  // Close desktop dropdown on outside click
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
-      if (navRef.current && !navRef.current.contains(e.target as Node)) {
-        setOpenDesktop(null);
-      }
+      if (navRef.current && !navRef.current.contains(e.target as Node)) setOpenDesktop(null);
     };
     document.addEventListener('mousedown', handleClickOutside);
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
-  // Close everything on Escape
   useEffect(() => {
     const handleEscape = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') {
-        setOpenDesktop(null);
-        setMobileOpen(false);
-      }
+      if (e.key === 'Escape') { setOpenDesktop(null); setMobileOpen(false); }
     };
     document.addEventListener('keydown', handleEscape);
     return () => document.removeEventListener('keydown', handleEscape);
   }, []);
 
-  // Add a subtle glass/shadow effect once the page is scrolled
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 12);
     handleScroll();
@@ -148,15 +167,11 @@ const Navbar: React.FC = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Lock body scroll while the mobile drawer is open
   useEffect(() => {
     document.body.style.overflow = mobileOpen ? 'hidden' : '';
-    return () => {
-      document.body.style.overflow = '';
-    };
+    return () => { document.body.style.overflow = ''; };
   }, [mobileOpen]);
 
-  // Close mobile drawer whenever the route changes
   useEffect(() => {
     setMobileOpen(false);
     setOpenMobile(null);
@@ -166,7 +181,6 @@ const Navbar: React.FC = () => {
     if (closeTimer.current) clearTimeout(closeTimer.current);
     closeTimer.current = setTimeout(() => setOpenDesktop(null), 180);
   };
-
   const cancelClose = () => {
     if (closeTimer.current) clearTimeout(closeTimer.current);
   };
@@ -180,421 +194,192 @@ const Navbar: React.FC = () => {
           0% { transform: translateY(-14px) scale(0.97); opacity: 0; }
           100% { transform: translateY(0) scale(1); opacity: 1; }
         }
-
         @keyframes dropFade {
           0% { opacity: 0; transform: translate(-50%, -8px) scale(0.96); }
           100% { opacity: 1; transform: translate(-50%, 0) scale(1); }
         }
-
-        @keyframes wiggle {
-          0%, 100% { transform: rotate(0deg); }
-          50% { transform: rotate(12deg); }
-        }
-
         @keyframes drawerSlide {
           0% { transform: translateX(100%); }
           100% { transform: translateX(0); }
         }
-
         @keyframes itemRise {
           0% { opacity: 0; transform: translateY(10px); }
           100% { opacity: 1; transform: translateY(0); }
         }
-
-        @media (prefers-reduced-motion: reduce) {
-          .nav-bar, .nav-dropdown, .nav-drawer, .nav-drawer-item, .nav-logo-mark {
-            animation: none !important;
-            transition: none !important;
-          }
-        }
-
-        .nav-wrap {
-          position: fixed;
-          top: 0;
-          left: 0;
-          right: 0;
-          z-index: 100;
-          width: 100%;
-          padding: 1rem 1.25rem 0;
-          background: transparent;
-          transition: padding 0.25s ease;
-        }
-
-        .nav-wrap.is-scrolled { padding-top: 0.6rem; }
-
-        .nav-spacer {
-          width: 100%;
-          height: 84px;
-        }
-
-        @media (min-width: 1024px) {
-          .nav-spacer { height: 92px; }
-        }
-
-        .nav-bar {
-          max-width: 82rem;
-          margin: 0 auto;
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-          gap: 0.75rem;
-          padding: 0.55rem 0.6rem 0.55rem 1rem;
-          background-color: transparent;
-          backdrop-filter: none;
-          -webkit-backdrop-filter: none;
-          border-radius: 9999px;
-          box-shadow: none;
-          border: 1px solid transparent;
-          transition: box-shadow 0.3s ease, background-color 0.3s ease, border-color 0.3s ease, transform 0.2s ease;
-          animation: navPop 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        .nav-bar:hover { transform: translateY(-1px); }
-
-        .nav-wrap.is-scrolled .nav-bar {
-          background-color: rgba(255,255,255,0.9);
-          backdrop-filter: blur(14px);
-          -webkit-backdrop-filter: blur(14px);
-          box-shadow: 0 10px 28px rgba(63,58,82,0.16);
-          border: 1px solid rgba(255,255,255,0.6);
-        }
-
-        /* ---------- Logo ---------- */
-        .nav-logo {
-          display: flex;
-          align-items: center;
-          gap: 0.55rem;
-          text-decoration: none;
-          flex-shrink: 0;
-        }
-
-        .nav-logo-mark {
-          width: 38px;
-          height: 38px;
-          border-radius: 9999px;
-          background-color: #FF4D8D;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          flex-shrink: 0;
-          transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-        }
-
-        .nav-logo:hover .nav-logo-mark { transform: rotate(-12deg) scale(1.08); }
-
-        .nav-logo-mark svg { width: 19px; height: 19px; stroke: #ffffff; stroke-width: 2.5; }
-
-        .nav-logo-text {
-          font-family: 'Baloo 2', sans-serif;
-          font-weight: 800;
-          font-size: 1.2rem;
-          color: #3F3A52;
-          line-height: 1;
-        }
-
-        .nav-logo-text span { color: #FF4D8D; }
-
-        /* ---------- Desktop links ---------- */
-        .nav-links {
-          display: none;
-          align-items: center;
-          gap: 0.2rem;
-          font-family: 'Quicksand', sans-serif;
-        }
-
-        .nav-dropdown-wrap { position: relative; }
-
-        .nav-link {
-          position: relative;
-          display: inline-flex;
-          align-items: center;
-          gap: 0.3rem;
-          padding: 0.6rem 0.85rem;
-          border-radius: 9999px;
-          font-weight: 700;
-          font-size: 0.86rem;
-          color: #3F3A52;
-          text-decoration: none;
-          background: none;
-          border: none;
-          cursor: pointer;
-          white-space: nowrap;
-          transition: background-color 0.2s ease, color 0.2s ease;
-        }
-
-        .nav-link:hover { background-color: var(--accent-bg); color: var(--accent); }
-
-        .nav-link.is-active { background-color: var(--accent-bg); color: var(--accent); }
-
-        .nav-link.is-active::after {
-          content: '';
-          position: absolute;
-          bottom: 3px;
-          left: 50%;
-          transform: translateX(-50%);
-          width: 5px;
-          height: 5px;
-          border-radius: 9999px;
-          background-color: var(--accent);
-        }
-
-        .nav-link svg.nav-chevron { width: 13px; height: 13px; stroke-width: 2.75; transition: transform 0.25s ease; flex-shrink: 0; }
-
-        .nav-link.is-open svg.nav-chevron { transform: rotate(180deg); }
-
-        /* ---------- Dropdown (desktop) ---------- */
-        .nav-dropdown {
-          position: absolute;
-          top: calc(100% + 16px);
-          left: 50%;
-          padding: 0.65rem;
-          background-color: #ffffff;
-          border-radius: 22px;
-          box-shadow: 0 18px 38px rgba(63,58,82,0.18);
-          display: none;
-          grid-template-columns: repeat(2, minmax(9.5rem, 1fr));
-          gap: 0.25rem;
-          transform-origin: top center;
-        }
-
-        .nav-dropdown.has-few { grid-template-columns: 1fr; width: 16rem; }
-        .nav-dropdown.has-many { width: 22rem; }
-
-        .nav-dropdown.is-open {
-          display: grid;
-          animation: dropFade 0.22s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-        }
-
-        .nav-dropdown::before {
-          content: '';
-          position: absolute;
-          top: -6px;
-          left: 50%;
-          transform: translateX(-50%) rotate(45deg);
-          width: 12px;
-          height: 12px;
-          background-color: #ffffff;
-          border-radius: 2px;
-        }
-
-        .nav-dropdown-item {
-          position: relative;
-          z-index: 1;
-          display: flex;
-          align-items: center;
-          gap: 0.65rem;
-          padding: 0.55rem 0.6rem;
-          border-radius: 14px;
-          text-decoration: none;
-          transition: background-color 0.15s ease, transform 0.15s ease;
-        }
-
-        .nav-dropdown-item:hover { background-color: #FFF7EC; transform: translateX(2px); }
-
-        .nav-dropdown-icon {
-          flex-shrink: 0;
-          width: 32px;
-          height: 32px;
-          border-radius: 9999px;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-        }
-
-        .nav-dropdown-icon svg { width: 15px; height: 15px; stroke-width: 2.25; }
-
-        .nav-dropdown-label {
-          font-family: 'Quicksand', sans-serif;
-          font-weight: 700;
-          font-size: 0.8rem;
-          line-height: 1.25;
-          color: #3F3A52;
-        }
-
-        /* ---------- CTA + hamburger ---------- */
         @keyframes ctaPulse {
           0%, 100% { box-shadow: 0 6px 16px rgba(52,179,107,0.35), 0 0 0 0 rgba(52,179,107,0.35); }
           50% { box-shadow: 0 6px 16px rgba(52,179,107,0.35), 0 0 0 6px rgba(52,179,107,0); }
         }
+        @media (prefers-reduced-motion: reduce) {
+          .nav-bar, .nav-dropdown, .nav-drawer, .nav-drawer-item, .nav-logo-mark {
+            animation: none !important; transition: none !important;
+          }
+        }
+
+        .nav-wrap {
+          position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+          width: 100%; padding: 1rem 1.25rem 0; background: transparent;
+          transition: padding 0.25s ease;
+        }
+        .nav-wrap.is-scrolled { padding-top: 0.6rem; }
+
+        .nav-spacer { width: 100%; height: 84px; }
+        @media (min-width: 1024px) { .nav-spacer { height: 92px; } }
+
+        .nav-bar {
+          max-width: 82rem; margin: 0 auto;
+          display: flex; align-items: center; justify-content: space-between; gap: 0.6rem;
+          padding: 0.55rem 0.6rem 0.55rem 1rem;
+          background-color: transparent; border-radius: 9999px;
+          box-shadow: none; border: 1px solid transparent;
+          transition: box-shadow 0.3s ease, background-color 0.3s ease, border-color 0.3s ease, transform 0.2s ease;
+          animation: navPop 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .nav-bar:hover { transform: translateY(-1px); }
+        .nav-wrap.is-scrolled .nav-bar {
+          background-color: rgba(255,255,255,0.9);
+          backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+          box-shadow: 0 10px 28px rgba(63,58,82,0.16);
+          border: 1px solid rgba(255,255,255,0.6);
+        }
+
+        .nav-logo { display: flex; align-items: center; gap: 0.55rem; text-decoration: none; flex-shrink: 0; }
+        .nav-logo-mark {
+          width: 38px; height: 38px; border-radius: 9999px; background-color: #FF4D8D;
+          display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+          transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        .nav-logo:hover .nav-logo-mark { transform: rotate(-12deg) scale(1.08); }
+        .nav-logo-mark svg { width: 19px; height: 19px; stroke: #ffffff; stroke-width: 2.5; }
+        .nav-logo-text { font-family: 'Baloo 2', sans-serif; font-weight: 800; font-size: 1.2rem; color: #3F3A52; line-height: 1; }
+        .nav-logo-text span { color: #FF4D8D; }
+
+        .nav-mobile-brand {
+          display: flex; flex: 1; min-width: 0; flex-direction: column;
+          align-items: center; justify-content: center; text-align: center;
+          text-decoration: none; line-height: 1.15; padding: 0 0.35rem;
+        }
+        .nav-mobile-brand-main { font-family: 'Baloo 2', sans-serif; font-weight: 800; font-size: clamp(0.82rem, 3.4vw, 1rem); color: #3F3A52; white-space: nowrap; }
+        .nav-mobile-brand-main span { color: #FF4D8D; }
+        .nav-mobile-brand-sub { font-family: 'Quicksand', sans-serif; font-weight: 600; font-size: clamp(0.5rem, 2.1vw, 0.62rem); letter-spacing: 0.01em; color: #6B6480; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100%; }
+        @media (min-width: 1024px) { .nav-mobile-brand { display: none; } }
+
+        .nav-links { display: none; align-items: center; gap: 0.2rem; font-family: 'Quicksand', sans-serif; }
+        .nav-dropdown-wrap { position: relative; }
+
+        .nav-link {
+          position: relative; display: inline-flex; align-items: center; gap: 0.3rem;
+          padding: 0.6rem 0.8rem; border-radius: 9999px; font-weight: 700; font-size: 0.84rem;
+          color: #3F3A52; text-decoration: none; background: none; border: none; cursor: pointer;
+          white-space: nowrap; transition: background-color 0.2s ease, color 0.2s ease;
+        }
+        .nav-link:hover { background-color: var(--accent-bg); color: var(--accent); }
+        .nav-link.is-active { background-color: var(--accent-bg); color: var(--accent); }
+        .nav-link.is-active::after {
+          content: ''; position: absolute; bottom: 3px; left: 50%; transform: translateX(-50%);
+          width: 5px; height: 5px; border-radius: 9999px; background-color: var(--accent);
+        }
+        .nav-link svg.nav-chevron { width: 13px; height: 13px; stroke-width: 2.75; transition: transform 0.25s ease; flex-shrink: 0; }
+        .nav-link.is-open svg.nav-chevron { transform: rotate(180deg); }
+
+        .nav-dropdown {
+          position: absolute; top: calc(100% + 16px); left: 50%;
+          padding: 0.65rem; background-color: #ffffff; border-radius: 22px;
+          box-shadow: 0 18px 38px rgba(63,58,82,0.18); display: none;
+          grid-template-columns: repeat(2, minmax(9.5rem, 1fr)); gap: 0.25rem;
+          transform-origin: top center;
+        }
+        .nav-dropdown.has-few { grid-template-columns: 1fr; width: 16rem; }
+        .nav-dropdown.has-many { width: 22rem; }
+        .nav-dropdown.is-open { display: grid; animation: dropFade 0.22s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+        .nav-dropdown::before {
+          content: ''; position: absolute; top: -6px; left: 50%; transform: translateX(-50%) rotate(45deg);
+          width: 12px; height: 12px; background-color: #ffffff; border-radius: 2px;
+        }
+
+        .nav-dropdown-item {
+          position: relative; z-index: 1; display: flex; align-items: center; gap: 0.65rem;
+          padding: 0.55rem 0.6rem; border-radius: 14px; text-decoration: none;
+          transition: background-color 0.15s ease, transform 0.15s ease;
+        }
+        .nav-dropdown-item:hover { background-color: #FFF7EC; transform: translateX(2px); }
+        .nav-dropdown-icon {
+          flex-shrink: 0; width: 32px; height: 32px; border-radius: 9999px;
+          display: flex; align-items: center; justify-content: center;
+        }
+        .nav-dropdown-icon svg { width: 15px; height: 15px; stroke-width: 2.25; }
+        .nav-dropdown-label { font-family: 'Quicksand', sans-serif; font-weight: 700; font-size: 0.8rem; line-height: 1.25; color: #3F3A52; }
 
         .nav-cta {
-          display: none;
-          align-items: center;
-          gap: 0.5rem;
-          padding: 0.62rem 1.3rem;
-          background-color: #34B36B;
-          color: #ffffff;
-          border-radius: 9999px;
-          font-family: 'Quicksand', sans-serif;
-          font-weight: 700;
-          font-size: 0.88rem;
-          text-decoration: none;
-          flex-shrink: 0;
-          box-shadow: 0 6px 16px rgba(52,179,107,0.35);
+          display: none; align-items: center; gap: 0.5rem; padding: 0.62rem 1.3rem;
+          background-color: #34B36B; color: #ffffff; border-radius: 9999px;
+          font-family: 'Quicksand', sans-serif; font-weight: 700; font-size: 0.88rem;
+          text-decoration: none; flex-shrink: 0; box-shadow: 0 6px 16px rgba(52,179,107,0.35);
           transition: transform 0.18s ease, box-shadow 0.18s ease;
           animation: ctaPulse 2.6s ease-in-out infinite;
         }
-
-        .nav-cta:hover {
-          transform: translateY(-2px) scale(1.04);
-          box-shadow: 0 10px 22px rgba(52,179,107,0.4);
-          animation-play-state: paused;
-        }
+        .nav-cta:hover { transform: translateY(-2px) scale(1.04); box-shadow: 0 10px 22px rgba(52,179,107,0.4); animation-play-state: paused; }
         .nav-cta svg { width: 16px; height: 16px; stroke-width: 2.5; }
 
         .nav-toggle {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          width: 42px;
-          height: 42px;
-          border-radius: 9999px;
-          background-color: #FFF3D9;
-          border: none;
-          cursor: pointer;
-          flex-shrink: 0;
-          box-shadow: 0 4px 12px rgba(63,58,82,0.12);
-          transition: background-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+          display: flex; align-items: center; justify-content: center;
+          width: 42px; height: 42px; border-radius: 9999px; background-color: #FFF3D9;
+          border: none; cursor: pointer; flex-shrink: 0; box-shadow: 0 4px 12px rgba(63,58,82,0.12);
+          transition: background-color 0.2s ease, transform 0.2s ease;
         }
-
         .nav-toggle:active { transform: scale(0.92); }
         .nav-toggle svg { width: 20px; height: 20px; stroke: #3F3A52; stroke-width: 2.4; }
 
-        /* ---------- Mobile drawer ---------- */
         .nav-drawer-overlay {
-          position: fixed;
-          inset: 0;
-          z-index: 110;
-          background-color: rgba(63,58,82,0.42);
-          backdrop-filter: blur(2px);
-          opacity: 0;
-          visibility: hidden;
-          transition: opacity 0.25s ease, visibility 0.25s;
+          position: fixed; inset: 0; z-index: 110; background-color: rgba(63,58,82,0.42);
+          backdrop-filter: blur(2px); opacity: 0; visibility: hidden; transition: opacity 0.25s ease, visibility 0.25s;
         }
-
         .nav-drawer-overlay.is-open { opacity: 1; visibility: visible; }
 
         .nav-drawer {
-          position: fixed;
-          top: 0;
-          right: 0;
-          z-index: 120;
-          height: 100%;
-          width: min(22rem, 86vw);
-          background-color: #FFF7EC;
-          box-shadow: -16px 0 40px rgba(63,58,82,0.2);
-          padding: 1.5rem 1.1rem 2rem;
-          overflow-y: auto;
-          transform: translateX(100%);
+          position: fixed; top: 0; right: 0; z-index: 120; height: 100%;
+          width: min(22rem, 86vw); background-color: #FFF7EC;
+          box-shadow: -16px 0 40px rgba(63,58,82,0.2); padding: 1.5rem 1.1rem 2rem;
+          overflow-y: auto; transform: translateX(100%);
           transition: transform 0.32s cubic-bezier(0.16, 1, 0.3, 1);
         }
-
         .nav-drawer.is-open { transform: translateX(0); }
 
-        .nav-drawer-head {
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-          margin-bottom: 1.25rem;
-        }
-
+        .nav-drawer-head { display: flex; align-items: center; justify-content: space-between; gap: 0.75rem; margin-bottom: 1.25rem; }
         .nav-drawer-close {
-          width: 38px;
-          height: 38px;
-          border-radius: 9999px;
-          background-color: #ffffff;
-          border: none;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          cursor: pointer;
-          box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+          width: 38px; height: 38px; border-radius: 9999px; background-color: #ffffff;
+          border: none; display: flex; align-items: center; justify-content: center; cursor: pointer;
+          flex-shrink: 0; box-shadow: 0 2px 8px rgba(0,0,0,0.08);
         }
-
         .nav-drawer-close svg { width: 18px; height: 18px; stroke: #3F3A52; stroke-width: 2.5; }
 
-        .nav-drawer-item {
-          opacity: 0;
-          animation: itemRise 0.4s ease forwards;
-        }
+        .nav-drawer-item { opacity: 0; animation: itemRise 0.4s ease forwards; }
 
         .nav-mobile-link {
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-          width: 100%;
-          padding: 0.85rem 0.9rem;
-          margin-bottom: 0.3rem;
-          border-radius: 16px;
-          font-family: 'Quicksand', sans-serif;
-          font-weight: 700;
-          font-size: 0.95rem;
-          color: #3F3A52;
-          text-decoration: none;
-          background-color: #ffffff;
-          border: none;
-          cursor: pointer;
-          text-align: left;
+          display: flex; align-items: center; justify-content: space-between; width: 100%;
+          padding: 0.85rem 0.9rem; margin-bottom: 0.3rem; border-radius: 16px;
+          font-family: 'Quicksand', sans-serif; font-weight: 700; font-size: 0.95rem;
+          color: #3F3A52; text-decoration: none; background-color: #ffffff; border: none; cursor: pointer; text-align: left;
         }
-
         .nav-mobile-link-label { display: flex; align-items: center; gap: 0.6rem; }
-
         .nav-mobile-link.is-active { background-color: var(--accent-bg); color: var(--accent); }
-
         .nav-mobile-link svg.nav-chevron { width: 16px; height: 16px; stroke-width: 2.5; transition: transform 0.25s ease; flex-shrink: 0; }
         .nav-mobile-link.is-open svg.nav-chevron { transform: rotate(180deg); }
-
-        .nav-mobile-link-icon {
-          width: 30px;
-          height: 30px;
-          border-radius: 9999px;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          flex-shrink: 0;
-        }
-
+        .nav-mobile-link-icon { width: 30px; height: 30px; border-radius: 9999px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
         .nav-mobile-link-icon svg { width: 14px; height: 14px; stroke-width: 2.4; }
 
-        .nav-mobile-sub {
-          overflow: hidden;
-          max-height: 0;
-          transition: max-height 0.3s ease;
-          padding-left: 0.5rem;
-        }
+        .nav-mobile-sub { overflow: hidden; max-height: 0; transition: max-height 0.3s ease; padding-left: 0.5rem; }
+        .nav-mobile-sub.is-open { max-height: 32rem; }
 
-        .nav-mobile-sub.is-open { max-height: 28rem; }
-
-        .nav-mobile-sub-item {
-          display: flex;
-          align-items: center;
-          gap: 0.6rem;
-          padding: 0.6rem 0.7rem;
-          margin-bottom: 0.25rem;
-          border-radius: 14px;
-          text-decoration: none;
-        }
-
-        .nav-mobile-sub-item:hover,
-        .nav-mobile-sub-item.is-active { background-color: #ffffff; }
+        .nav-mobile-sub-item { display: flex; align-items: center; gap: 0.6rem; padding: 0.6rem 0.7rem; margin-bottom: 0.25rem; border-radius: 14px; text-decoration: none; }
+        .nav-mobile-sub-item:hover, .nav-mobile-sub-item.is-active { background-color: #ffffff; }
 
         .nav-drawer-cta {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          gap: 0.55rem;
-          margin-top: 0.75rem;
-          padding: 0.95rem;
-          background-color: #34B36B;
-          color: #ffffff;
-          border-radius: 16px;
-          font-family: 'Quicksand', sans-serif;
-          font-weight: 700;
-          font-size: 0.95rem;
-          text-decoration: none;
-          box-shadow: 0 6px 16px rgba(52,179,107,0.3);
+          display: flex; align-items: center; justify-content: center; gap: 0.55rem;
+          margin-top: 0.75rem; padding: 0.95rem; background-color: #34B36B; color: #ffffff;
+          border-radius: 16px; font-family: 'Quicksand', sans-serif; font-weight: 700;
+          font-size: 0.95rem; text-decoration: none; box-shadow: 0 6px 16px rgba(52,179,107,0.3);
         }
-
         .nav-drawer-cta svg { width: 17px; height: 17px; stroke-width: 2.5; }
 
         @media (min-width: 1024px) {
@@ -607,7 +392,6 @@ const Navbar: React.FC = () => {
       <div className={`nav-wrap ${scrolled ? 'is-scrolled' : ''}`} ref={navRef}>
         <nav className="nav-bar">
           <Link href="/" className="nav-logo">
-            
             <Image
               src="/phulwari_logo.png"
               alt="Phulwari Mother & Child Activity Centre"
@@ -618,6 +402,11 @@ const Navbar: React.FC = () => {
             />
           </Link>
 
+          <Link href="/" className="nav-mobile-brand">
+            <span className="nav-mobile-brand-main">Phulwari</span>
+            <span className="nav-mobile-brand-sub">Mother &amp; Child Activity Centre</span>
+          </Link>
+
           <div className="nav-links">
             {navItems.map((item) => {
               const active = isParentActive(item);
@@ -625,27 +414,18 @@ const Navbar: React.FC = () => {
 
               if (!item.subpages) {
                 return (
-                  <Link
-                    key={item.label}
-                    href={item.href}
-                    className={`nav-link ${active ? 'is-active' : ''}`}
-                    style={styleVars}
-                  >
+                  <Link key={item.label} href={item.href} className={`nav-link ${active ? 'is-active' : ''}`} style={styleVars}>
                     {item.label}
                   </Link>
                 );
               }
 
               const isOpen = openDesktop === item.label;
-
               return (
                 <div
                   key={item.label}
                   className="nav-dropdown-wrap"
-                  onMouseEnter={() => {
-                    cancelClose();
-                    setOpenDesktop(item.label);
-                  }}
+                  onMouseEnter={() => { cancelClose(); setOpenDesktop(item.label); }}
                   onMouseLeave={scheduleClose}
                 >
                   <button
@@ -657,21 +437,11 @@ const Navbar: React.FC = () => {
                     {item.label}
                     <ChevronDown className="nav-chevron" />
                   </button>
-
-                  <div
-                    className={`nav-dropdown ${isOpen ? 'is-open' : ''} ${
-                      item.subpages.length > 4 ? 'has-many' : 'has-few'
-                    }`}
-                  >
+                  <div className={`nav-dropdown ${isOpen ? 'is-open' : ''} ${item.subpages.length > 4 ? 'has-many' : 'has-few'}`}>
                     {item.subpages.map((sub) => {
                       const Icon = sub.icon;
                       return (
-                        <Link
-                          key={sub.href}
-                          href={sub.href}
-                          className="nav-dropdown-item"
-                          onClick={() => setOpenDesktop(null)}
-                        >
+                        <Link key={sub.href} href={sub.href} className="nav-dropdown-item" onClick={() => setOpenDesktop(null)}>
                           <span className="nav-dropdown-icon" style={{ backgroundColor: sub.bg }}>
                             <Icon style={{ stroke: sub.color }} />
                           </span>
@@ -685,37 +455,26 @@ const Navbar: React.FC = () => {
             })}
           </div>
 
-          <Link href="./contact" className="nav-cta">
+          <Link href="/contact" className="nav-cta">
             <Phone />
             Contact Us
           </Link>
 
-          <button
-            className="nav-toggle"
-            onClick={() => setMobileOpen(true)}
-            aria-label="Open menu"
-          >
+          <button className="nav-toggle" onClick={() => setMobileOpen(true)} aria-label="Open menu">
             <Menu />
           </button>
         </nav>
       </div>
       <div className="nav-spacer" aria-hidden="true" />
 
-      {/* ---------- Mobile drawer ---------- */}
-      <div
-        className={`nav-drawer-overlay ${mobileOpen ? 'is-open' : ''}`}
-        onClick={() => setMobileOpen(false)}
-      />
+      {/* Mobile drawer */}
+      <div className={`nav-drawer-overlay ${mobileOpen ? 'is-open' : ''}`} onClick={() => setMobileOpen(false)} />
       <aside className={`nav-drawer ${mobileOpen ? 'is-open' : ''}`} aria-hidden={!mobileOpen}>
         <div className="nav-drawer-head">
           <span className="nav-logo-text">
-            Phulwari<span> 🌈</span>
+            Phulwari <span style={{ color: '#34B36B' }}>Mother & Child</span> Activity Centre
           </span>
-          <button
-            className="nav-drawer-close"
-            onClick={() => setMobileOpen(false)}
-            aria-label="Close menu"
-          >
+          <button className="nav-drawer-close" onClick={() => setMobileOpen(false)} aria-label="Close menu">
             <X />
           </button>
         </div>
@@ -729,12 +488,7 @@ const Navbar: React.FC = () => {
           if (!item.subpages) {
             return (
               <div key={item.label} className="nav-drawer-item" style={animDelay}>
-                <Link
-                  href={item.href}
-                  className={`nav-mobile-link ${active ? 'is-active' : ''}`}
-                  style={styleVars}
-                  onClick={() => setMobileOpen(false)}
-                >
+                <Link href={item.href} className={`nav-mobile-link ${active ? 'is-active' : ''}`} style={styleVars} onClick={() => setMobileOpen(false)}>
                   <span className="nav-mobile-link-label">
                     <span className="nav-mobile-link-icon" style={{ backgroundColor: item.accentBg }}>
                       <ItemIcon style={{ stroke: item.accent }} />
@@ -747,7 +501,6 @@ const Navbar: React.FC = () => {
           }
 
           const isOpen = openMobile === item.label;
-
           return (
             <div key={item.label} className="nav-drawer-item" style={animDelay}>
               <button
@@ -764,22 +517,13 @@ const Navbar: React.FC = () => {
                 </span>
                 <ChevronDown className="nav-chevron" />
               </button>
-
               <div className={`nav-mobile-sub ${isOpen ? 'is-open' : ''}`}>
                 {item.subpages.map((sub) => {
                   const Icon = sub.icon;
                   const subActive = isActive(sub.href);
                   return (
-                    <Link
-                      key={sub.href}
-                      href={sub.href}
-                      className={`nav-mobile-sub-item ${subActive ? 'is-active' : ''}`}
-                      onClick={() => setMobileOpen(false)}
-                    >
-                      <span
-                        className="nav-dropdown-icon"
-                        style={{ backgroundColor: sub.bg, width: 28, height: 28 }}
-                      >
+                    <Link key={sub.href} href={sub.href} className={`nav-mobile-sub-item ${subActive ? 'is-active' : ''}`} onClick={() => setMobileOpen(false)}>
+                      <span className="nav-dropdown-icon" style={{ backgroundColor: sub.bg, width: 28, height: 28 }}>
                         <Icon style={{ stroke: sub.color }} />
                       </span>
                       <span className="nav-dropdown-label">{sub.label}</span>

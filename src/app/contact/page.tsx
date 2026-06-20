@@ -27,7 +27,7 @@ import {
 
 const PHONE_NUMBER = '+916207368839';
 const WHATSAPP_NUMBER = '916207368839';
-const EMAIL = 'info@phulwari.in';
+const EMAIL = 'phulwari02@gmail.com';
 const ADDRESS =
   'M/32, Road No. 25, Sri Krishna Nagar, Kidwaipuri Main Road, Patna, Bihar – 800001';
 

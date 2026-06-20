@@ -426,45 +426,7 @@ export default function FAQPage() {
           })}
         </div>
 
-        {/* CTA */}
-        <section className="faq-cta">
-          <div className="faq-cta-box">
-            <HelpCircle style={{ width: 36, height: 36, color: '#FF4D8D', marginBottom: 12 }} />
-            <h2 className="faq-cta-title">Still Have Questions?</h2>
-            <p className="faq-cta-text">
-              Our team is always happy to help — whether it&apos;s about admissions, activities,
-              camps, birthday celebrations or fitness programs.
-            </p>
-            <div className="faq-cta-buttons">
-              <a href={`tel:${PHONE_NUMBER}`} className="faq-cta-button btn-call">
-                <Phone />
-                <span>Call Us</span>
-              </a>
-              <a
-                href={`https://wa.me/${WHATSAPP_NUMBER}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="faq-cta-button btn-whatsapp"
-              >
-                <MessageCircle />
-                <span>WhatsApp Us</span>
-              </a>
-              <a
-                href="https://maps.google.com/?q=M/32, Road No. 25, Sri Krishna Nagar, Kidwaipuri Main Road, Patna, Bihar 800001"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="faq-cta-button btn-visit"
-              >
-                <MapPin />
-                <span>Visit Our Centre</span>
-              </a>
-              <a href="#contact" className="faq-cta-button btn-join">
-                <Target />
-                <span>Join Phulwari</span>
-              </a>
-            </div>
-          </div>
-        </section>
+        
       </div>
     </>
   );

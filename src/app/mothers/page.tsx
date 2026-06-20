@@ -669,58 +669,7 @@ const Programs: React.FC<ProgramsProps> = ({ imageBasePath = '/' }) => {
           </div>
         </section>
 
-        {/* CTA */}
-        <section className="pg-cta">
-          <div className="pg-cta-box">
-            <PartyPopper style={{ width: 36, height: 36, color: '#FF8A3D', marginBottom: 12 }} />
-            <h2 className="pg-cta-title">Enroll Today</h2>
-            <p className="pg-cta-text">
-              Give your child the opportunity to learn, play, explore and grow in a safe and
-              nurturing environment.
-            </p>
-           <div className="pg-cta-buttons">
-  <a
-    href="tel:+916207368839"
-    className="pg-cta-button btn-call"
-  >
-    <Phone />
-    <span>Call Now</span>
-  </a>
-
-  <a
-    href={`https://wa.me/916207368839?text=${encodeURIComponent(
-      `Hello Phulwari Team 🌈
-
-I would like to know more about your programs.
-
-👤 Parent Name:
-👶 Child Age:
-
-I am interested in:
-
-✅ Child Admissions
-✅ Activity Programs
-✅ Mother & Toddler Program
-✅ Phulwari Premium Circle
-✅ Phulwari Core
-✅ Birthday Party Booking
-✅ Summer Camp
-✅ Winter Camp
-
-Please share the details, fees structure, timings and admission process.
-
-Thank You 😊`
-    )}`}
-    target="_blank"
-    rel="noopener noreferrer"
-    className="pg-cta-button btn-whatsapp"
-  >
-    <MessageCircle />
-    <span>WhatsApp Now</span>
-  </a>
-</div>
-          </div>
-        </section>
+        
       </div>
     </>
   );

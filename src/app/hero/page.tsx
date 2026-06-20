@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   Phone,
   MessageCircle,
@@ -11,20 +11,34 @@ import {
   Dumbbell,
   Tent,
   Gift,
+  Sparkles,
+  Star,
+  ChevronDown,
 } from 'lucide-react';
 
 interface HeroProps {
   backgroundImage?: string;
 }
 
+const PROGRAMS = ['Summer Camp', 'Birthday Parties', 'Mom Fitness Sessions', 'Daily Play Hours'];
+
 const Hero: React.FC<HeroProps> = ({ backgroundImage = 'herobg.png' }) => {
+  const [programIndex, setProgramIndex] = useState(0);
+
+  useEffect(() => {
+    const id = setInterval(() => {
+      setProgramIndex((i) => (i + 1) % PROGRAMS.length);
+    }, 2600);
+    return () => clearInterval(id);
+  }, []);
+
   const features = [
-    { icon: Shield, label: 'Safe & Child-Friendly Environment', color: '#34B36B', bg: '#E3F7EA' },
+    { icon: Shield, label: 'Safe & Child-Friendly', color: '#34B36B', bg: '#E3F7EA' },
     { icon: Users, label: 'Experienced Trainers', color: '#3D8BFF', bg: '#E5EFFF' },
     { icon: Zap, label: 'Activity-Based Learning', color: '#E8A621', bg: '#FFF3D9' },
     { icon: Dumbbell, label: 'Mother Fitness Programs', color: '#FF4D8D', bg: '#FFE6EF' },
     { icon: Tent, label: 'Summer & Winter Camps', color: '#8B5CF6', bg: '#EFE7FE' },
-    { icon: Gift, label: 'Birthday Party Celebrations', color: '#FF8A3D', bg: '#FFEADB' },
+    { icon: Gift, label: 'Birthday Celebrations', color: '#FF8A3D', bg: '#FFEADB' },
   ];
 
   return (
@@ -46,14 +60,27 @@ const Hero: React.FC<HeroProps> = ({ backgroundImage = 'herobg.png' }) => {
           line-height: 1.05;
         }
 
+        .sr-only {
+          position: absolute;
+          width: 1px; height: 1px;
+          padding: 0; margin: -1px;
+          overflow: hidden;
+          clip: rect(0, 0, 0, 0);
+          white-space: nowrap;
+          border: 0;
+        }
+
         /* ---------- Section shell ---------- */
         .hero-container {
           position: relative;
+          isolation: isolate;
           width: 100%;
           min-height: 100vh;
           overflow: hidden;
           background-color: #FFF7EC;
-          padding-bottom: 36px; /* room for the scalloped edge */
+          background-image: radial-gradient(#EADFC8 1.4px, transparent 1.4px);
+          background-size: 26px 26px;
+          padding-bottom: 40px; /* room for the scalloped edge */
         }
 
         /* Signature detail: a soft scalloped edge, like a torn-paper cloud,
@@ -64,33 +91,41 @@ const Hero: React.FC<HeroProps> = ({ backgroundImage = 'herobg.png' }) => {
           left: 0;
           right: 0;
           bottom: 0;
-          height: 36px;
-          background: radial-gradient(circle at 18px 0, transparent 19px, #ffffff 20px);
-          background-size: 36px 36px;
+          height: 40px;
+          background: radial-gradient(circle at 20px 0, transparent 21px, #ffffff 22px);
+          background-size: 40px 40px;
           background-repeat: repeat-x;
         }
 
-        .hero-illustration {
+        /* ---------- Floating decoration ---------- */
+        .hero-blob {
           position: absolute;
-          top: 0;
-          right: 0;
-          height: 80%;
-          width: 56%;
-          z-index: 0;
+          border-radius: 50%;
+          filter: blur(50px);
+          opacity: 0.4;
           pointer-events: none;
-          display: flex;
-          align-items: flex-end;
-          justify-content: flex-end;
+          z-index: 0;
+        }
+        .hero-blob--pink { top: -60px; left: -60px; width: 280px; height: 280px; background: #FFCBE0; animation: blob-float 9s ease-in-out infinite; }
+        .hero-blob--blue { top: 10%; right: 4%; width: 320px; height: 320px; background: #CFE3FF; animation: blob-float 11s ease-in-out infinite -3s; }
+        .hero-blob--yellow { bottom: 8%; left: 6%; width: 220px; height: 220px; background: #FFE9B3; animation: blob-float 8s ease-in-out infinite -1.5s; }
+
+        .hero-sparkle { position: absolute; pointer-events: none; z-index: 1; }
+        .hero-sparkle--1 { top: 6%; left: 46%; color: #FFD166; animation: sparkle-spin 6s linear infinite; }
+        .hero-sparkle--2 { top: 78%; left: 38%; color: #34B36B; animation: blob-float 5s ease-in-out infinite -2s; }
+        .hero-sparkle--3 { top: 16%; left: 58%; color: #FF4D8D; animation: sparkle-spin 7s linear infinite reverse; }
+
+        @keyframes blob-float {
+          0%, 100% { transform: translateY(0); }
+          50% { transform: translateY(-18px); }
+        }
+        @keyframes sparkle-spin {
+          0% { transform: rotate(0deg) scale(1); }
+          50% { transform: rotate(180deg) scale(1.15); }
+          100% { transform: rotate(360deg) scale(1); }
         }
 
-        .hero-illustration img {
-          width: 100%;
-          height: auto;
-          max-height: 95%;
-          object-fit: contain;
-          object-position: bottom right;
-        }
-
+        /* ---------- Content shell & grid ---------- */
         .hero-content {
           position: relative;
           z-index: 10;
@@ -102,22 +137,30 @@ const Hero: React.FC<HeroProps> = ({ backgroundImage = 'herobg.png' }) => {
           padding: 3rem 1.25rem;
         }
 
-        .hero-inner {
+        .hero-grid {
           max-width: 80rem;
           width: 100%;
           margin: 0 auto;
+          display: grid;
+          grid-template-columns: 1fr;
+          gap: 2.75rem;
+          align-items: center;
         }
 
         .hero-text-col {
           display: flex;
           flex-direction: column;
+          align-items: flex-start;
+          order: 1;
         }
 
         /* ---------- Badge ---------- */
         .hero-badge {
           display: inline-flex;
+          align-items: center;
+          gap: 0.4rem;
           align-self: flex-start;
-          margin-bottom: 1.1rem;
+          margin-bottom: 1.25rem;
           padding: 0.5rem 1.2rem;
           background-color: #FFD166;
           border-radius: 9999px;
@@ -128,21 +171,28 @@ const Hero: React.FC<HeroProps> = ({ backgroundImage = 'herobg.png' }) => {
           text-transform: uppercase;
           transform: rotate(-2deg);
         }
+        .hero-badge svg { flex-shrink: 0; }
 
         /* ---------- Title ---------- */
         .hero-title {
           margin-bottom: 1.1rem;
-          font-size: 2.5rem;
+          font-size: clamp(4.25rem, 6.5vw + 2rem, 4.25rem);
           letter-spacing: -0.01em;
         }
 
         .hero-title-line { display: block; }
         .text-pink { color: #FF4D8D; }
         .text-blue { color: #3D8BFF; }
+        .underline-squiggle {
+          text-decoration: underline;
+          text-decoration-style: wavy;
+          text-decoration-thickness: 3px;
+          text-underline-offset: 7px;
+        }
 
         /* ---------- Description ---------- */
         .hero-description {
-          margin-bottom: 1.75rem;
+          margin-bottom: 1.5rem;
           font-size: 1rem;
           line-height: 1.6;
           color: #6B6480;
@@ -155,7 +205,7 @@ const Hero: React.FC<HeroProps> = ({ backgroundImage = 'herobg.png' }) => {
           display: flex;
           flex-wrap: wrap;
           gap: 0.75rem;
-          margin-bottom: 2.5rem;
+          margin-bottom: 1.25rem;
         }
 
         .hero-button {
@@ -170,32 +220,85 @@ const Hero: React.FC<HeroProps> = ({ backgroundImage = 'herobg.png' }) => {
           font-family: 'Quicksand', sans-serif;
           border-radius: 9999px;
           cursor: pointer;
-          transition: transform 0.15s ease;
+          transition: transform 0.18s ease, box-shadow 0.18s ease;
           box-shadow: 0 4px 10px rgba(0,0,0,0.08);
         }
 
-        .hero-button:hover { transform: translateY(-2px); }
+        .hero-button:nth-child(odd):hover { transform: translateY(-3px) rotate(-1.5deg); box-shadow: 0 8px 16px rgba(0,0,0,0.12); }
+        .hero-button:nth-child(even):hover { transform: translateY(-3px) rotate(1.5deg); box-shadow: 0 8px 16px rgba(0,0,0,0.12); }
+        .hero-button:active { transform: scale(0.96); }
+        .hero-button:focus-visible { outline: 3px solid #3F3A52; outline-offset: 3px; }
         .hero-button svg { width: 18px; height: 18px; stroke: #ffffff; stroke-width: 2.25; }
 
         .btn-call { background-color: #FF4D8D; }
         .btn-whatsapp { background-color: #34B36B; }
         .btn-birthday { background-color: #FF8A3D; }
 
+        /* ---------- Ticker ---------- */
+        .hero-ticker {
+          display: inline-flex;
+          align-items: center;
+          gap: 0.5rem;
+          margin-bottom: 1.75rem;
+          padding: 0.45rem 0.9rem 0.45rem 0.7rem;
+          background-color: #ffffff;
+          border-radius: 9999px;
+          font-size: 0.8rem;
+          font-weight: 700;
+          color: #6B6480;
+          box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+        }
+        .hero-ticker-dot {
+          width: 8px; height: 8px;
+          border-radius: 9999px;
+          background: #34B36B;
+          animation: pulse-dot 1.6s ease-in-out infinite;
+        }
+        .hero-ticker-word {
+          color: #FF4D8D;
+          font-weight: 800;
+          animation: ticker-pop 0.35s ease;
+        }
+        @keyframes pulse-dot {
+          0%, 100% { opacity: 1; transform: scale(1); }
+          50% { opacity: 0.4; transform: scale(0.7); }
+        }
+        @keyframes ticker-pop {
+          from { opacity: 0; transform: translateY(4px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+
         /* ---------- Features ---------- */
         .hero-features {
-          display: flex;
-          flex-wrap: wrap;
+          display: grid;
+          grid-template-columns: repeat(2, 1fr);
           gap: 0.65rem;
+          width: 100%;
         }
 
         .hero-feature {
           display: flex;
           align-items: center;
           gap: 0.55rem;
-          padding: 0.5rem 0.9rem 0.5rem 0.5rem;
+          padding: 0.55rem 0.85rem 0.55rem 0.5rem;
           background-color: #ffffff;
           border-radius: 9999px;
           box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+          transition: transform 0.2s ease, box-shadow 0.2s ease;
+          animation: feature-pop 0.45s ease backwards;
+          animation-delay: var(--delay, 0s);
+        }
+        .hero-feature:hover { transform: translateY(-3px) scale(1.02); box-shadow: 0 8px 18px rgba(0,0,0,0.1); }
+        .hero-feature:hover .hero-feature-icon { animation: icon-bounce 0.5s ease; }
+
+        @keyframes feature-pop {
+          from { opacity: 0; transform: translateY(8px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes icon-bounce {
+          0%, 100% { transform: translateY(0); }
+          30% { transform: translateY(-3px); }
+          60% { transform: translateY(1px); }
         }
 
         .hero-feature-icon {
@@ -211,89 +314,206 @@ const Hero: React.FC<HeroProps> = ({ backgroundImage = 'herobg.png' }) => {
         .hero-feature-icon svg { width: 14px; height: 14px; stroke-width: 2.25; }
 
         .hero-feature-text {
-          font-size: 0.75rem;
+          font-size: 0.74rem;
           font-weight: 700;
-          line-height: 1.3;
-          white-space: nowrap;
+          line-height: 1.25;
+        }
+
+        /* ---------- Illustration column ---------- */
+        .hero-illustration-col {
+          position: relative;
+          order: 2;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          min-height: 320px;
+        }
+
+        .hero-illustration-blob {
+          position: absolute;
+          inset: 6% 8%;
+          z-index: 0;
+          background: linear-gradient(135deg, #FFE3EE 0%, #FFF3D9 50%, #E5EFFF 100%);
+          border-radius: 58% 42% 65% 35% / 45% 55% 45% 55%;
+        }
+
+        .hero-illustration-img {
+          position: relative;
+          z-index: 1;
+          width: 100%;
+          max-width: 26rem;
+          height: auto;
+          object-fit: contain;
+          filter: drop-shadow(0 18px 24px rgba(63, 58, 82, 0.18));
+          transition: transform 0.4s ease;
+        }
+        .hero-illustration-col:hover .hero-illustration-img { transform: rotate(-1.5deg) scale(1.03); }
+
+        .hero-sticker {
+          position: absolute;
+          bottom: 4%;
+          left: 2%;
+          z-index: 2;
+          display: flex;
+          align-items: center;
+          gap: 0.4rem;
+          padding: 0.5rem 0.9rem;
+          background-color: #ffffff;
+          border-radius: 9999px;
+          box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+          font-size: 0.72rem;
+          font-weight: 700;
+          color: #3F3A52;
+          transform: rotate(-4deg);
+        }
+        .hero-sticker svg { color: #FFD166; fill: #FFD166; flex-shrink: 0; }
+
+        /* ---------- Scroll cue ---------- */
+        .hero-scroll-cue {
+          display: none;
+          position: absolute;
+          left: 50%;
+          bottom: 52px;
+          transform: translateX(-50%);
+          width: 38px;
+          height: 38px;
+          align-items: center;
+          justify-content: center;
+          border: none;
+          border-radius: 9999px;
+          background-color: #ffffff;
+          color: #6B6480;
+          box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+          cursor: pointer;
+          z-index: 10;
+          animation: bob 1.8s ease-in-out infinite;
+        }
+        .hero-scroll-cue:focus-visible { outline: 3px solid #3F3A52; outline-offset: 3px; }
+        @keyframes bob {
+          0%, 100% { transform: translateX(-50%) translateY(0); }
+          50% { transform: translateX(-50%) translateY(6px); }
         }
 
         /* ---------- Responsive ---------- */
+        @media (min-width: 480px) {
+          .hero-features { grid-template-columns: repeat(2, 1fr); }
+        }
+
         @media (min-width: 640px) {
           .hero-badge { font-size: 0.8rem; padding: 0.55rem 1.4rem; }
-          .hero-title { font-size: 3.25rem; }
-          .hero-description { font-size: 1.1rem; margin-bottom: 2rem; }
+          .hero-description { font-size: 1.1rem; margin-bottom: 1.75rem; }
           .hero-feature-text { font-size: 0.85rem; }
+          .hero-features { grid-template-columns: repeat(3, 1fr); }
+          .hero-scroll-cue { display: flex; }
         }
 
         @media (min-width: 1024px) {
-          .hero-title { font-size: 4rem; }
-          .hero-text-col { max-width: 44%; }
+          .hero-grid { grid-template-columns: 1.05fr 0.95fr; gap: 3rem; }
+          .hero-text-col { max-width: 100%; }
+          .hero-illustration-col { min-height: 460px; }
         }
 
         @media (max-width: 1023px) {
-          .hero-container { display: flex; flex-direction: column; }
-          .hero-content { padding: 2.5rem 1.25rem; order: 1; }
-          .hero-illustration {
-            position: relative;
-            width: 100%;
-            height: auto;
-            justify-content: center;
-            margin-top: 1.5rem;
-            order: 2;
+          .hero-illustration-img { max-width: 22rem; }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+          .hero-container *,
+          .hero-container *::after,
+          .hero-container *::before {
+            animation: none !important;
+            transition: none !important;
           }
-          .hero-illustration img { width: 100%; max-width: 26rem; max-height: none; }
-          .hero-inner { display: flex; flex-direction: column; }
         }
       `}</style>
 
-      <div className="hero-container">
-        <div className="hero-illustration">
-          <img src={`/${backgroundImage}`} alt="A mother and child playing together" />
-        </div>
+      <section className="hero-container">
+        <span className="hero-blob hero-blob--pink" aria-hidden="true" />
+        <span className="hero-blob hero-blob--blue" aria-hidden="true" />
+        <span className="hero-blob hero-blob--yellow" aria-hidden="true" />
+        <Star className="hero-sparkle hero-sparkle--1" size={20} fill="#FFD166" aria-hidden="true" />
+        <Sparkles className="hero-sparkle hero-sparkle--2" size={22} aria-hidden="true" />
+        <Star className="hero-sparkle hero-sparkle--3" size={16} fill="#FF4D8D" aria-hidden="true" />
 
         <div className="hero-content">
-          <div className="hero-inner">
+          <div className="hero-grid">
             <div className="hero-text-col">
-              <div className="hero-badge">A Fun, Engaging &amp; Active Place</div>
+              <div className="hero-badge">
+                <Sparkles size={14} />
+                <span>Phulwari Mother & Child Activity Centre</span>
+              </div>
 
               <h1 className="hero-title">
-                <span className="hero-title-line text-pink">For Moms</span>
-                <span className="hero-title-line text-blue">&amp; Kids</span>
+                <span className="hero-title-line">
+                  Where Kids <span className="text-pink underline-squiggle">Play</span>
+                </span>
+                <span className="hero-title-line">
+                  &amp; Moms <span className="text-blue underline-squiggle">Shine</span>
+                </span>
               </h1>
 
               <p className="hero-description">
-                Patna's unique mother &amp; child activity centre where children learn,
-                play, grow and explore while mothers stay active, healthy and engaged.
+                Patna's own mother &amp; child activity centre — children learn,
+                play and grow right alongside you, while moms stay active,
+                social and strong.
               </p>
 
-             <div className="hero-buttons">
-  <button
-    className="hero-button btn-call"
-    onClick={() => window.location.href = "tel:+916207368839"}
-  >
-    <Phone size={18} />
-    <span>Call Now</span>
-  </button>
+              <div className="hero-buttons">
+                <button
+                  className="hero-button btn-call"
+                  onClick={() => (window.location.href = 'tel:+916207368839')}
+                >
+                  <Phone size={18} />
+                  <span>Call Now</span>
+                </button>
 
-  <button
-    className="hero-button btn-whatsapp"
-    onClick={() =>
-      window.open(
-        "https://wa.me/916207368839?text=Hello%20Phulwari%20Mother%20%26%20Child%20Activity%20Centre.%20I%20would%20like%20to%20know%20more%20about%20your%20programs%2C%20admissions%2C%20birthday%20parties%20and%20camps.",
-        "_blank"
-      )
-    }
-  >
-    <MessageCircle size={18} />
-    <span>WhatsApp Us</span>
-  </button>
-</div>
+                <button
+                  className="hero-button btn-whatsapp"
+                  onClick={() =>
+                    window.open(
+                      'https://wa.me/916207368839?text=Hello%20Phulwari%20Mother%20%26%20Child%20Activity%20Centre.%20I%20would%20like%20to%20know%20more%20about%20your%20programs%2C%20admissions%2C%20birthday%20parties%20and%20camps.',
+                      '_blank'
+                    )
+                  }
+                >
+                  <MessageCircle size={18} />
+                  <span>WhatsApp Us</span>
+                </button>
+
+                <button
+                  className="hero-button btn-birthday"
+                  onClick={() =>
+                    window.open(
+                      'https://wa.me/916207368839?text=Hello%20Phulwari%20Mother%20%26%20Child%20Activity%20Centre.%20I%20would%20like%20to%20enquire%20about%20booking%20a%20birthday%20party.',
+                      '_blank'
+                    )
+                  }
+                >
+                  <Cake size={18} />
+                  <span>Plan a Birthday</span>
+                </button>
+              </div>
+
+              <div className="hero-ticker" aria-hidden="true">
+                <span className="hero-ticker-dot" />
+                <span>Now enrolling:</span>
+                <span className="hero-ticker-word" key={programIndex}>
+                  {PROGRAMS[programIndex]}
+                </span>
+              </div>
+              <span className="sr-only">
+                We are currently enrolling for {PROGRAMS.join(', ')}.
+              </span>
 
               <div className="hero-features">
                 {features.map((feature, index) => {
                   const IconComponent = feature.icon;
                   return (
-                    <div key={index} className="hero-feature">
+                    <div
+                      key={index}
+                      className="hero-feature"
+                      style={{ ['--delay' as any]: `${index * 0.06}s` }}
+                    >
                       <div className="hero-feature-icon" style={{ backgroundColor: feature.bg }}>
                         <IconComponent style={{ stroke: feature.color }} />
                       </div>
@@ -305,9 +525,30 @@ const Hero: React.FC<HeroProps> = ({ backgroundImage = 'herobg.png' }) => {
                 })}
               </div>
             </div>
+
+            <div className="hero-illustration-col">
+              <div className="hero-illustration-blob" aria-hidden="true" />
+              <img
+                className="hero-illustration-img"
+                src={`/${backgroundImage}`}
+                alt="A mother and child playing together"
+              />
+              <div className="hero-sticker">
+                <Star size={14} />
+                <span>A Joyful Spot for Moms &amp; Kids</span>
+              </div>
+            </div>
           </div>
+
+          <button
+            className="hero-scroll-cue"
+            aria-label="Scroll to learn more"
+            onClick={() => window.scrollBy({ top: window.innerHeight * 0.85, behavior: 'smooth' })}
+          >
+            <ChevronDown size={20} />
+          </button>
         </div>
-      </div>
+      </section>
     </>
   );
 };

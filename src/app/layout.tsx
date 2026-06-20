@@ -7,7 +7,7 @@ import './globals.css';
 /* --------------------------------------------------------------------- */
 /*  Update these once — they're reused across all the metadata below     */
 /* --------------------------------------------------------------------- */
-const SITE_URL = 'https://www.phulwari.in'; // TODO: replace with your live domain
+const SITE_URL = 'https://www.phulwari.co.in';
 const SITE_NAME = 'Phulwari Mother & Child Activity Centre';
 const SITE_DESCRIPTION =
   "Patna's unique mother & child activity centre where children learn, play, grow and explore while mothers stay active, healthy and engaged. Music, dance, gymnastics, MMA, roller skating, art & craft, yoga, cricket and more — plus fitness programs for mothers, summer & winter camps, and birthday party celebrations.";
@@ -45,8 +45,6 @@ export const metadata: Metadata = {
     canonical: '/',
   },
 
-  // Prevents Google from auto-converting your phone/email/address into
-  // tap-to-call links with mismatched styling on mobile.
   formatDetection: {
     email: false,
     address: false,
@@ -62,7 +60,7 @@ export const metadata: Metadata = {
     description: SITE_DESCRIPTION,
     images: [
       {
-        url: '/og-image.jpg', // TODO: add a 1200x630 image at /public/og-image.jpg
+        url: '/og-image.jpg', // Place a 1200×630 image at /public/og-image.jpg
         width: 1200,
         height: 630,
         alt: SITE_NAME,
@@ -90,7 +88,7 @@ export const metadata: Metadata = {
   },
 
   icons: {
-    icon: '/phulwari_logo.png',
+    icon: '/favicon.ico',
     shortcut: '/favicon.ico',
     apple: '/apple-touch-icon.png',
   },
@@ -115,10 +113,10 @@ const localBusinessSchema = {
   '@context': 'https://schema.org',
   '@type': 'ChildCare',
   name: SITE_NAME,
-  image: `${SITE_URL}/og-image.jpg`,
+  image: `${SITE_URL}/phulwari_logo.png`,
   url: SITE_URL,
   telephone: '+916207368839',
-  email: 'info@phulwari.in',
+  email: 'info@phulwari.co.in',
   address: {
     '@type': 'PostalAddress',
     streetAddress: 'M/32, Road No. 25, Sri Krishna Nagar, Kidwaipuri Main Road',

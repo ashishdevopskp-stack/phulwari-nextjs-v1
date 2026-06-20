@@ -477,68 +477,6 @@ export default function BirthdayPartyPage() {
 
         
 
-        {/* CTA */}
-       <section className="bp-cta">
-  <div className="bp-cta-box">
-    <PartyPopper
-      style={{
-        width: 36,
-        height: 36,
-        color: "#FF8A3D",
-        marginBottom: 12,
-      }}
-    />
-
-    <h2 className="bp-cta-title">
-      Book Your Child&apos;s Birthday Party Today
-    </h2>
-
-    <p className="bp-cta-text">
-      Let us help you create a celebration filled with smiles, laughter, fun and
-      unforgettable memories.
-    </p>
-
-    <div className="bp-cta-buttons">
-      <a
-        href="tel:+916207368839"
-        className="bp-cta-button btn-call"
-      >
-        <Phone />
-        <span>Call Now</span>
-      </a>
-
-      <a
-        href={`https://wa.me/916207368839?text=${encodeURIComponent(
-          `Hello Phulwari Team 🎂
-
-I would like to book a Birthday Party for my child.
-
-Please share details regarding:
-
-🎉 Birthday Party Packages
-🎈 Theme Decorations
-🎂 Cake & Celebration Setup
-🎮 Activities & Games
-📸 Photo-Friendly Setup
-💰 Pricing Details
-📅 Available Dates
-
-Child Name:
-Child Age:
-Preferred Date:
-
-Thank You 😊`
-        )}`}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="bp-cta-button btn-whatsapp"
-      >
-        <MessageCircle />
-        <span>WhatsApp Now</span>
-      </a>
-    </div>
-  </div>
-</section>
       </div>
 
       {/* Lightbox */}
