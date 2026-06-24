@@ -32,6 +32,7 @@ import {
   FileText,
   Lock,
   CalendarDays,
+  HelpCircle,
 } from 'lucide-react';
 
 interface SubItem {
@@ -125,6 +126,7 @@ const navItems: NavItem[] = [
     subpages: [
       { href: '/legal/terms',   label: 'Terms & Conditions', icon: FileText, color: '#FF4D8D', bg: '#FFE6EF' },
       { href: '/legal/privacy', label: 'Privacy Policy',     icon: Lock,     color: '#3D8BFF', bg: '#E5EFFF' },
+      { href: '/legal/faq',    label: 'Frequently Asked Questions', icon: HelpCircle, color: '#FF8A3D', bg: '#FFEADB' },
     ],
   },
 ];

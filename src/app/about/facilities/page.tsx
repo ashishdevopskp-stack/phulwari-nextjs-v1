@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { Building2, ShieldCheck, Dumbbell, Palette, PartyPopper, Baby, Sparkles } from 'lucide-react';
+import { Building2, ShieldCheck, Dumbbell, Palette, PartyPopper, Baby, Sparkles,Eye } from 'lucide-react';
 import CurvedImage from '../CurvedImage';
 
 interface FacilitiesProps {
@@ -17,6 +17,7 @@ const Facilities: React.FC<FacilitiesProps> = ({ image = 'cricketplay.png' }) =>
     { icon: PartyPopper, label: 'Event & Celebration Area', color: '#FF8A3D', bg: '#FFEADB' },
     { icon: ShieldCheck, label: 'Child-Friendly Infrastructure', color: '#8B5CF6', bg: '#EFE7FE' },
     { icon: Sparkles, label: 'Clean & Hygienic Premises', color: '#FF4D8D', bg: '#FFE6EF' },
+    { icon: Eye, label: '24/7 CCTV Monitoring', color: '#FF4D8D', bg: '#FFE6EF' },
   ];
 
   return (

@@ -129,7 +129,7 @@ const activities = [
     tagline: 'Learn Through Play',
     description: 'A safe and exciting indoor play area where children can explore, socialize and have fun.',
     benefits: ['Social Development', 'Physical Activity', 'Creative Play', 'Confidence Building'],
-    ageLabel: '2+ Years',
+    ageLabel: '9+ Months',
     category: 'Play',
     href: '/activities/play-zone',
     color: '#E8A621',

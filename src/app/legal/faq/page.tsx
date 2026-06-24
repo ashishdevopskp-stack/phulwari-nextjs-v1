@@ -145,7 +145,7 @@ const faqs: FAQItem[] = [
     icon: Cake,
     color: '#FF8A3D',
     bg: '#FFEADB',
-    question: 'Do you organize Birthday Parties?',
+    question: 'How You Organise Birthday ?',
     answer: (
       <ul className="faq-list">
         <li>Theme Decorations</li>

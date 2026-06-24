@@ -21,7 +21,7 @@ const programs = [
       'Creative Play',
       'Confidence Building',
     ],
-    age: '2+ Years',
+    age: '9+ Months ',
     image: 'playground.png',
     sectionBg: '#ffffff',
     blobRing: '#FF8A3D',

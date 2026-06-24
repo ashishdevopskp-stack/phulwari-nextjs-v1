@@ -490,20 +490,11 @@ const Hero: React.FC<HeroProps> = ({ backgroundImage = 'herobg.png' }) => {
                   }
                 >
                   <Cake size={18} />
-                  <span>Plan a Birthday</span>
+                  <span>Book a demo </span>
                 </button>
               </div>
 
-              <div className="hero-ticker" aria-hidden="true">
-                <span className="hero-ticker-dot" />
-                <span>Now enrolling:</span>
-                <span className="hero-ticker-word" key={programIndex}>
-                  {PROGRAMS[programIndex]}
-                </span>
-              </div>
-              <span className="sr-only">
-                We are currently enrolling for {PROGRAMS.join(', ')}.
-              </span>
+
 
               <div className="hero-features">
                 {features.map((feature, index) => {
