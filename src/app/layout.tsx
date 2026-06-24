@@ -3,6 +3,7 @@ import Script from 'next/script';
 import Navbar from '@/app/Navbar';
 import Footer from '@/app/footer/page';
 import './globals.css';
+import FloatingButton from './FloatingButtons';
 
 /* --------------------------------------------------------------------- */
 /*  Update these once — they're reused across all the metadata below     */
@@ -158,6 +159,7 @@ export default function RootLayout({
         <Navbar />
         {children}
         <Footer />
+        <FloatingButton />
       </body>
     </html>
   );

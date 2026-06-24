@@ -483,7 +483,7 @@ const Hero: React.FC<HeroProps> = ({ backgroundImage = 'herobg.png' }) => {
                   className="hero-button btn-birthday"
                   onClick={() =>
                     window.open(
-                      'https://wa.me/916207368839?text=Hello%20Phulwari%20Mother%20%26%20Child%20Activity%20Centre.%20I%20would%20like%20to%20enquire%20about%20booking%20a%20birthday%20party.',
+                      'https://wa.me/916207368839?text=Hello%20Phulwari%20Mother%20%26%20Child%20Activity%20Centre.%20I%20would%20like%20to%20enquire%20about%20booking%20a%20demo%20at%20Phulwari.',
                       '_blank'
                     )
                   }

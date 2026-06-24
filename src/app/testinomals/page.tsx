@@ -4,20 +4,101 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Phone, MessageCircle, Star, Quote, ThumbsUp, ExternalLink, Send, X, CheckCircle } from 'lucide-react';
 
 const GOOGLE_REVIEW_URL =
-  'https://www.google.com/search?q=phulwari+mother+and+child+activity+centre&oq=&gs_lcrp=EgZjaHJvbWUqBggBEEUYOzIGCAAQRRg5MgYIARBFGDsyBwgCEAAYgAQyBwgDEAAYgAQyBwgEEAAYgAQyBwgFEAAYgAQyBwgGEAAYgAQyBwgHEAAYgAQyBwgIEAAYgAQyBggJEEUYPDIHCAoQLhiABDIHCAsQABiABDIHCAwQABiABDIHCA0QABiABDIGCA4QRRg80gEINTQ5MGowajSoAgGwAgE&client=ms-android-motorola-rvo3&sourceid=chrome-mobile&ie=UTF-8&zx=1782149690079#sv=CAESzQEKuQEStgEKd0FKaVQ0dEpoZ3V3V1MyRnR5TWM1Z0dzbjlxLXBSZWpFWmZVeTlhRUNtRTFQQ1hVS0w0SWFrbUZDNS1uenpVaks4dWkyUFdCZVNzR01uX3ZSeC1NUkJZVGt4SklLelVZMmNqaVRpeFlRTE85TTRRcDVuaHpPWk5FEhdQSEk1YW9yVkRKS1RzZU1QMlp5NTZRRRoiQURzcjlmUmhsY2d1bFJRZWJvdzliRnhteVMxcmh5QVAwZxIEODA1MRoBMyoAMAA4AUAAGAAg9pm1jgxKAhAC';
+  'https://www.google.com/search?q=phulwari+mother+and+child+activity+centre&oq=&gs_lcrp=EgZjaHJvbWUqBggBEEUYOzIGCAAQRRg5MgYIARBFGDsyBwgCEAAYgAQyBwgDEAAYgAQyBwgEEAAYgAQyBwgFEAAYgAQyBwgGEAAYgAQyBwgHEAAYgAQyBwgIEAAYgAQyBggJEEUYPDIHCAoQLhiABDIHCAsQABiABDIHCAwQABiABDIHCA0QABiABDIGCA4QRRg80gEINTQ5MGowajSoAgGwAgE&client=ms-android-motorola-rvo3&sourceid=chrome-mobile&ie=UTF-8&zx=1782149690079#sv=CAESzQEKuQEStgEKd0FJaVQ0dEpoZ3V3V1MyRnR5TWM1Z0dzbjlxLXBSZWpFWmZVeTlhRUNtRTFQQ1hVS0w0SWFrbUZDNS1uenpVaks4dWkyUFdCZVNzR01uX3ZSeC1NUkJZVGt4SklLelVZMmNqaVRpeFlRTE85TTRRcDVuaHpPWk5FEhdQSEk1YW9yVkRKS1RzZU1QMlp5NTZRRRoiQURzcjlmUmhsY2d1bFJRZWJvdzliRnhteVMxcmh5QVAwZxIEODA1MRoBMyoAMAA4AUAAGAAg9pm1jgxKAhAC';
 
 const WHATSAPP_BASE = 'https://wa.me/916207368839?text=';
 
 const reviews = [
-  { name: 'Priyaraj', avatar: 'PR', rating: 5, date: 'November 2024', text: 'Phulwari is an amazing place for kids! My daughter has improved so much in dance and art since joining. The trainers are very experienced and caring. Highly recommend to all parents.', color: '#FF4D8D', bg: '#FFE6EF', program: 'Phulwari Core' },
-  { name: 'Braj Raj', avatar: 'BR', rating: 4, date: 'October 2024', text: "The Mother & Toddler Program is absolutely wonderful. My toddler loves the playzone and I enjoy the fitness sessions. It's a great bonding experience. The staff is very supportive and friendly.", color: '#34B36B', bg: '#E3F7EA', program: 'Mother & Toddler Program' },
-  { name: 'Sushmita Kumari', avatar: 'SK', rating: 5, date: 'October 2024', text: 'My son joined the Premium Circle and it has been life-changing. He is more confident, active and social. The gymnastics and yoga sessions are excellent. The environment is very safe and nurturing.', color: '#8B5CF6', bg: '#EFE7FE', program: 'Phulwari Premium Circle' },
-  { name: 'Ankita Prasun ', avatar: 'AP', rating: 5, date: 'September 2024', text: 'We enrolled our daughter in the Summer Camp and she had the best time of her life. She made new friends, learnt new skills and came back every day with so much energy and happiness. Thank you Phulwari!', color: '#FF8A3D', bg: '#FFEADB', program: 'Summer Camp' },
-  { name: 'Manicallysh', avatar: 'M', rating: 4, date: 'September 2024', text: 'Excellent centre for children\'s overall development. My child has shown remarkable improvement in creativity and confidence after joining Phulwari Core. The art and dance sessions are top quality.', color: '#3D8BFF', bg: '#E5EFFF', program: 'Phulwari Core' },
-  { name: 'shilpa Shree', avatar: 'SS', rating: 5, date: 'August 2024', text: 'The birthday party we booked at Phulwari was absolutely magical! The kids had so much fun. Everything was well organized and the staff made sure every child was happy. Will definitely book again.', color: '#E8A621', bg: '#FFF3D9', program: 'Birthday Party' },
-  { name: 'Puja Kumari', avatar: 'PK', rating: 4, date: 'August 2024', text: 'As a mother, I was looking for a safe and engaging place for my child. Phulwari exceeded all my expectations. The trainers are professional, the environment is clean and the programs are well structured.', color: '#FF4D8D', bg: '#FFE6EF', program: 'Phulwari Premium Circle' },
-  { name: 'sidhart kumar ', avatar: 'SK', rating: 5, date: 'July 2024', text: 'My daughter loves the yoga and gymnastics sessions at Phulwari. She has become more flexible, focused and disciplined. The Winter Camp was also fantastic. Highly recommended centre in Patna.', color: '#34B36B', bg: '#E3F7EA', program: 'Phulwari Core' },
-  { name: 'ROHIT AANAND', avatar: 'RA', rating: 5, date: 'July 2024', text: 'Wonderful place for children. My son has developed great social skills and leadership qualities after joining Phulwari. The activities are fun, educational and engaging. The staff is always helpful.', color: '#8B5CF6', bg: '#EFE7FE', program: 'Phulwari Core' },
+  {
+    name: 'Priyaraj',
+    avatar: 'PR',
+    rating: 5,
+    date: 'November 2024',
+    text: 'Phulwari is an amazing place for kids! My daughter has improved so much in dance and art since joining. The trainers are very experienced and caring. Highly recommend to all parents.',
+    color: '#FF4D8D',
+    bg: '#FFE6EF',
+    program: 'Phulwari Core',
+  },
+  {
+    name: 'Braj Raj',
+    avatar: 'BR',
+    rating: 4,
+    date: 'October 2024',
+    text: "The Mother & Toddler Program is absolutely wonderful. My toddler loves the playzone and I enjoy the fitness sessions. It's a great bonding experience. The staff is very supportive and friendly.",
+    color: '#34B36B',
+    bg: '#E3F7EA',
+    program: 'Mother & Toddler Program',
+  },
+  {
+    name: 'Sushmita Kumari',
+    avatar: 'SK',
+    rating: 5,
+    date: 'October 2024',
+    text: 'My son joined the Premium Circle and it has been life-changing. He is more confident, active and social. The gymnastics and yoga sessions are excellent. The environment is very safe and nurturing.',
+    color: '#8B5CF6',
+    bg: '#EFE7FE',
+    program: 'Phulwari Premium Circle',
+  },
+  {
+    name: 'Ankita Prasun',
+    avatar: 'AP',
+    rating: 5,
+    date: 'September 2024',
+    text: 'We enrolled our daughter in the Summer Camp and she had the best time of her life. She made new friends, learnt new skills and came back every day with so much energy and happiness. Thank you Phulwari!',
+    color: '#FF8A3D',
+    bg: '#FFEADB',
+    program: 'Summer Camp',
+  },
+  {
+    name: 'Manicallysh',
+    avatar: 'M',
+    rating: 4,
+    date: 'September 2024',
+    text: "Excellent centre for children's overall development. My child has shown remarkable improvement in creativity and confidence after joining Phulwari Core. The art and dance sessions are top quality.",
+    color: '#3D8BFF',
+    bg: '#E5EFFF',
+    program: 'Phulwari Core',
+  },
+  {
+    name: 'Shilpa Shree',
+    avatar: 'SS',
+    rating: 5,
+    date: 'August 2024',
+    text: 'The birthday party we booked at Phulwari was absolutely magical! The kids had so much fun. Everything was well organized and the staff made sure every child was happy. Will definitely book again.',
+    color: '#E8A621',
+    bg: '#FFF3D9',
+    program: 'Birthday Party',
+  },
+  {
+    name: 'Puja Kumari',
+    avatar: 'PK',
+    rating: 4,
+    date: 'August 2024',
+    text: 'As a mother, I was looking for a safe and engaging place for my child. Phulwari exceeded all my expectations. The trainers are professional, the environment is clean and the programs are well structured.',
+    color: '#FF4D8D',
+    bg: '#FFE6EF',
+    program: 'Phulwari Premium Circle',
+  },
+  {
+    name: 'Sidhart Kumar',
+    avatar: 'SK',
+    rating: 5,
+    date: 'July 2024',
+    text: 'My daughter loves the yoga and gymnastics sessions at Phulwari. She has become more flexible, focused and disciplined. The Winter Camp was also fantastic. Highly recommended centre in Patna.',
+    color: '#34B36B',
+    bg: '#E3F7EA',
+    program: 'Phulwari Core',
+  },
+  {
+    name: 'Rohit Aanand',
+    avatar: 'RA',
+    rating: 5,
+    date: 'July 2024',
+    text: 'Wonderful place for children. My son has developed great social skills and leadership qualities after joining Phulwari. The activities are fun, educational and engaging. The staff is always helpful.',
+    color: '#8B5CF6',
+    bg: '#EFE7FE',
+    program: 'Phulwari Core',
+  },
 ];
 
 const stats = [
@@ -31,13 +112,27 @@ function StarRating({ rating }: { rating: number }) {
   return (
     <div style={{ display: 'flex', gap: 2 }}>
       {[1, 2, 3, 4, 5].map((s) => (
-        <Star key={s} style={{ width: 14, height: 14, fill: s <= rating ? '#FFD166' : '#E5E0D8', stroke: s <= rating ? '#FFD166' : '#E5E0D8' }} />
+        <Star
+          key={s}
+          style={{
+            width: 14,
+            height: 14,
+            fill: s <= rating ? '#FFD166' : '#E5E0D8',
+            stroke: s <= rating ? '#FFD166' : '#E5E0D8',
+          }}
+        />
       ))}
     </div>
   );
 }
 
-function InteractiveStars({ value, onChange }: { value: number; onChange: (v: number) => void }) {
+function InteractiveStars({
+  value,
+  onChange,
+}: {
+  value: number;
+  onChange: (v: number) => void;
+}) {
   const [hovered, setHovered] = useState(0);
   return (
     <div style={{ display: 'flex', gap: 6 }}>
@@ -51,7 +146,15 @@ function InteractiveStars({ value, onChange }: { value: number; onChange: (v: nu
           style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 2 }}
           aria-label={`${s} star`}
         >
-          <Star style={{ width: 32, height: 32, fill: s <= (hovered || value) ? '#FFD166' : '#E5E0D8', stroke: s <= (hovered || value) ? '#FFD166' : '#E5E0D8', transition: 'all 0.15s' }} />
+          <Star
+            style={{
+              width: 32,
+              height: 32,
+              fill: s <= (hovered || value) ? '#FFD166' : '#E5E0D8',
+              stroke: s <= (hovered || value) ? '#FFD166' : '#E5E0D8',
+              transition: 'all 0.15s',
+            }}
+          />
         </button>
       ))}
     </div>
@@ -92,15 +195,15 @@ export default function TestimonialsPage() {
     if (!form.name.trim() || !form.message.trim() || form.rating === 0) return;
 
     if (form.rating >= 4) {
-      // Copy message to clipboard then redirect to Google review
       const text = `${form.message}`;
       navigator.clipboard.writeText(text).catch(() => {});
       window.open(GOOGLE_REVIEW_URL, '_blank');
       setSubmitted(true);
     } else {
-      // Low rating — send to WhatsApp
       const msg = encodeURIComponent(
-        `Hi Phulwari Team! My name is ${form.name}${form.program ? ` (enrolled in ${form.program})` : ''}.\n\nFeedback: ${form.message}\n\nRating: ${'⭐'.repeat(form.rating)}`
+        `Hi Phulwari Team! My name is ${form.name}${
+          form.program ? ` (enrolled in ${form.program})` : ''
+        }.\n\nFeedback: ${form.message}\n\nRating: ${'⭐'.repeat(form.rating)}`
       );
       window.open(`${WHATSAPP_BASE}${msg}`, '_blank');
       setLowRatingShown(true);
@@ -115,6 +218,7 @@ export default function TestimonialsPage() {
         @keyframes tmFloat  { 0%,100% { transform:translateY(0); } 50% { transform:translateY(-5px); } }
 
         .tm-page { background-color:#FFF7EC; font-family:'Quicksand',sans-serif; color:#3F3A52; min-height:100vh; padding-bottom:4rem; }
+
         .tm-hero { max-width:48rem; margin:0 auto; padding:3.5rem 1.25rem 2rem; text-align:center; animation:tmFadeUp 0.5s ease both; }
         .tm-hero-badge { display:inline-flex; align-items:center; gap:.4rem; padding:.5rem 1.2rem; background-color:#FFD166; border-radius:9999px; font-size:.7rem; font-weight:700; letter-spacing:.04em; text-transform:uppercase; color:#6B4500; animation:tmFloat 4s ease-in-out infinite; margin-bottom:1rem; }
         .tm-hero-title { font-family:'Baloo 2',sans-serif; font-weight:800; font-size:clamp(1.8rem,3vw+1rem,2.4rem); line-height:1.18; margin-bottom:.75rem; }
@@ -137,7 +241,6 @@ export default function TestimonialsPage() {
         .tm-google-link { display:inline-flex; align-items:center; gap:.4rem; padding:.6rem 1.1rem; background-color:#4285F4; color:#ffffff; border-radius:9999px; font-size:.82rem; font-weight:700; text-decoration:none; transition:transform .15s ease; }
         .tm-google-link:hover { transform:translateY(-2px); }
 
-        /* ── Carousel ── */
         .cs-wrap { max-width:100%; overflow:hidden; padding:0 1.25rem 1.5rem; }
         .cs-track { display:flex; gap:16px; overflow-x:auto; scroll-snap-type:x mandatory; scrollbar-width:none; -ms-overflow-style:none; cursor:grab; }
         .cs-track::-webkit-scrollbar { display:none; }
@@ -164,7 +267,6 @@ export default function TestimonialsPage() {
         .tm-show-btn { display:inline-flex; align-items:center; gap:.5rem; padding:.8rem 2rem; background-color:#ffffff; border:2px solid #FFD166; border-radius:9999px; font-weight:700; font-size:.9rem; color:#3F3A52; cursor:pointer; font-family:'Quicksand',sans-serif; transition:transform .15s ease,background-color .15s ease; }
         .tm-show-btn:hover { transform:translateY(-2px); background-color:#FFF7EC; }
 
-        /* ── Review Form ── */
         .rf-wrap { max-width:40rem; margin:2.5rem auto 0; padding:0 1.25rem; }
         .rf-box { background:#ffffff; border-radius:28px; padding:2rem 1.75rem; box-shadow:0 8px 24px rgba(63,58,82,.09); }
         .rf-title { font-family:'Baloo 2',sans-serif; font-weight:800; font-size:1.35rem; color:#3F3A52; margin-bottom:.35rem; }
@@ -203,9 +305,15 @@ export default function TestimonialsPage() {
 
         {/* Hero */}
         <header className="tm-hero">
-          <div className="tm-hero-badge"><Star size={12} /> Reviews &amp; Testimonials</div>
-          <h1 className="tm-hero-title">What <span>Parents Say</span> About Us</h1>
-          <p className="tm-hero-sub">Real stories from real families who have experienced the Phulwari difference. Trusted by hundreds of parents in Patna.</p>
+          <div className="tm-hero-badge">
+            <Star size={12} /> Reviews &amp; Testimonials
+          </div>
+          <h1 className="tm-hero-title">
+            What <span>Parents Say</span> About Us
+          </h1>
+          <p className="tm-hero-sub">
+            Real stories from real families who have experienced the Phulwari difference. Trusted by hundreds of parents in Patna.
+          </p>
         </header>
 
         {/* Stats */}
@@ -230,83 +338,132 @@ export default function TestimonialsPage() {
                 <path fill="#1976D2" d="M43.611 20.083H42V20H24v8h11.303a12.04 12.04 0 01-4.087 5.571l.003-.002 6.19 5.238C36.971 39.205 44 34 44 24c0-1.341-.138-2.65-.389-3.917z"/>
               </svg>
               <div>
-                <div style={{ display:'flex', alignItems:'center', gap:6 }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
                   <span className="tm-google-rating">4.9</span>
-                  <div style={{ display:'flex', gap:2 }}>
-                    {[1,2,3,4,5].map(s => <Star key={s} style={{ width:16, height:16, fill:'#FFD166', stroke:'#FFD166' }} />)}
+                  <div style={{ display: 'flex', gap: 2 }}>
+                    {[1, 2, 3, 4, 5].map((s) => (
+                      <Star key={s} style={{ width: 16, height: 16, fill: '#FFD166', stroke: '#FFD166' }} />
+                    ))}
                   </div>
                 </div>
-                <div className="tm-google-sub">Verified Google Reviews · Phulwari Mother &amp; Child Activity Centre</div>
+                <div className="tm-google-sub">
+                  Verified Google Reviews · Phulwari Mother &amp; Child Activity Centre
+                </div>
               </div>
             </div>
-            <a href={GOOGLE_REVIEW_URL} target="_blank" rel="noopener noreferrer" className="tm-google-link">
+            <a
+              href={GOOGLE_REVIEW_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="tm-google-link"
+            >
               <ExternalLink size={14} /> See on Google
             </a>
           </div>
         </div>
 
-        {/* ── Auto-scroll Carousel ── */}
+        {/* Auto-scroll Carousel */}
         <div className="cs-wrap">
           <div className="cs-track" ref={carouselRef}>
             {reviews.map((r, i) => (
               <div className="cs-card tm-card" key={i}>
                 <div className="tm-card-top">
-                  <div className="tm-avatar" style={{ backgroundColor: r.color }}>{r.avatar}</div>
+                  <div className="tm-avatar" style={{ backgroundColor: r.color }}>
+                    {r.avatar}
+                  </div>
                   <div>
                     <div className="tm-name">{r.name}</div>
                     <div className="tm-date">{r.date}</div>
                   </div>
-                  <Quote size={18} className="tm-quote-icon" style={{ marginLeft:'auto' }} />
+                  <Quote size={18} className="tm-quote-icon" style={{ marginLeft: 'auto' }} />
                 </div>
                 <StarRating rating={r.rating} />
                 <p className="tm-text">{r.text}</p>
                 <div className="tm-card-footer">
-                  <span className="tm-program-pill" style={{ backgroundColor: r.bg, color: r.color }}>{r.program}</span>
-                  <span className="tm-verified"><ThumbsUp size={13} /><span>Verified</span></span>
+                  <span
+                    className="tm-program-pill"
+                    style={{ backgroundColor: r.bg, color: r.color }}
+                  >
+                    {r.program}
+                  </span>
+                  <span className="tm-verified">
+                    <ThumbsUp size={13} />
+                    <span>Verified</span>
+                  </span>
                 </div>
               </div>
             ))}
           </div>
           <div className="cs-dots">
             {reviews.map((_, i) => (
-              <button key={i} className={`cs-dot ${i === carouselIdx ? 'active' : ''}`} onClick={() => setCarouselIdx(i)} aria-label={`Go to review ${i+1}`} />
+              <button
+                key={i}
+                className={`cs-dot ${i === carouselIdx ? 'active' : ''}`}
+                onClick={() => setCarouselIdx(i)}
+                aria-label={`Go to review ${i + 1}`}
+              />
             ))}
           </div>
         </div>
 
+        
        
 
-        {/* ── Write a Review Form ── */}
+        {/* Write a Review Form */}
         <div className="rf-wrap">
           <div className="rf-box">
             {submitted ? (
               <div className="rf-success">
                 <div className="rf-success-icon">🎉</div>
                 <div className="rf-success-title">Thank You for Your Review!</div>
-                <p className="rf-success-text">Your review has been copied to clipboard. Google Reviews has opened — just paste it and submit. We really appreciate your kind words!</p>
+                <p className="rf-success-text">
+                  Your review has been copied to clipboard. Google Reviews has opened — just paste
+                  it and submit. We really appreciate your kind words!
+                </p>
               </div>
             ) : lowRatingShown ? (
               <div>
                 <div className="rf-low-msg">
                   <div className="rf-low-msg-title">We've received your feedback 💬</div>
-                  <p className="rf-low-msg-text">Your message has been sent to our WhatsApp. Our team will get back to you shortly to understand your concern and make things right. Thank you for helping us improve!</p>
+                  <p className="rf-low-msg-text">
+                    Your message has been sent to our WhatsApp. Our team will get back to you
+                    shortly to understand your concern and make things right. Thank you for helping
+                    us improve!
+                  </p>
                 </div>
-                <button className="rf-submit" style={{ marginTop:'1rem' }} onClick={() => { setForm({ name:'', program:'', rating:0, message:'' }); setLowRatingShown(false); }}>
+                <button
+                  className="rf-submit"
+                  style={{ marginTop: '1rem' }}
+                  onClick={() => {
+                    setForm({ name: '', program: '', rating: 0, message: '' });
+                    setLowRatingShown(false);
+                  }}
+                >
                   <X size={16} /> Close
                 </button>
               </div>
             ) : (
               <>
                 <div className="rf-title">Share Your Experience ✍️</div>
+                <p className="rf-sub">Your feedback helps other parents and helps us grow!</p>
 
                 <div className="rf-field">
                   <label className="rf-label">Your Name *</label>
-                  <input className="rf-input" placeholder="e.g. John Doe" value={form.name} onChange={e => setForm(f => ({ ...f, name: e.target.value }))} />
+                  <input
+                    className="rf-input"
+                    placeholder="e.g. John Doe"
+                    value={form.name}
+                    onChange={(e) => setForm((f) => ({ ...f, name: e.target.value }))}
+                  />
                 </div>
 
                 <div className="rf-field">
                   <label className="rf-label">Program / Activity (optional)</label>
-                  <select className="rf-input" value={form.program} onChange={e => setForm(f => ({ ...f, program: e.target.value }))}>
+                  <select
+                    className="rf-input"
+                    value={form.program}
+                    onChange={(e) => setForm((f) => ({ ...f, program: e.target.value }))}
+                  >
                     <option value="">Select a program...</option>
                     <option>Phulwari Core</option>
                     <option>Phulwari Premium Circle</option>
@@ -319,23 +476,48 @@ export default function TestimonialsPage() {
                   </select>
                 </div>
 
-              
+                <div className="rf-field rf-star-row">
+                  <label className="rf-label">Your Rating *</label>
+                  <InteractiveStars
+                    value={form.rating}
+                    onChange={(v) => setForm((f) => ({ ...f, rating: v }))}
+                  />
+                  <div className="rf-star-hint">
+                    {form.rating === 0 && 'Click to rate'}
+                    {form.rating === 1 && 'Poor'}
+                    {form.rating === 2 && 'Fair'}
+                    {form.rating === 3 && 'Good'}
+                    {form.rating === 4 && 'Great'}
+                    {form.rating === 5 && 'Excellent!'}
+                  </div>
+                </div>
 
                 <div className="rf-field">
                   <label className="rf-label">Your Review *</label>
-                  <textarea className="rf-input rf-textarea" placeholder="Tell other parents about your experience at Phulwari..." value={form.message} onChange={e => setForm(f => ({ ...f, message: e.target.value }))} />
+                  <textarea
+                    className="rf-input rf-textarea"
+                    placeholder="Tell other parents about your experience at Phulwari..."
+                    value={form.message}
+                    onChange={(e) => setForm((f) => ({ ...f, message: e.target.value }))}
+                  />
                 </div>
 
-                <button className="rf-submit" onClick={handleSubmit} disabled={!form.name.trim() || !form.message.trim() || form.rating === 0}>
+                <button
+                  className="rf-submit"
+                  onClick={handleSubmit}
+                  disabled={!form.name.trim() || !form.message.trim() || form.rating === 0}
+                >
                   <Send size={16} />
-                  {form.rating >= 4 ? 'Submit & Post on Google' : form.rating > 0 ? 'Send Feedback on WhatsApp' : 'Submit Review'}
+                  {form.rating >= 4
+                    ? 'Submit & Post on Google'
+                    : form.rating > 0
+                    ? 'Send Feedback on WhatsApp'
+                    : 'Submit Review'}
                 </button>
               </>
             )}
           </div>
         </div>
-
-        
 
       </div>
     </>
