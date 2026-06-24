@@ -168,7 +168,6 @@ const Hero: React.FC<HeroProps> = ({ backgroundImage = 'herobg.png' }) => {
           font-weight: 700;
           color: #6B4500;
           letter-spacing: 0.04em;
-          text-transform: uppercase;
           transform: rotate(-2deg);
         }
         .hero-badge svg { flex-shrink: 0; }

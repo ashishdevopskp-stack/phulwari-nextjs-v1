@@ -19,6 +19,18 @@ const slides = [
   { src: '/galary14.png' },
   { src: '/galary15.png' },
   { src: '/galary16.png' },
+  { src: '/galary17.png' },
+  { src: '/galary18.png' },
+  { src: '/galary19.png' },
+  { src: '/galary20.png' },
+  { src: '/galary21.png' },
+  { src: '/galary22.png' },
+  { src: '/galary23.png' },
+  { src: '/galary24.png' },
+  { src: '/galary25.png' },
+  { src: '/galary26.png' },
+
+ 
 ];
 
 export default function GalleryPage() {
